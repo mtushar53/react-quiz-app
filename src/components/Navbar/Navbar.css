@@ -1,0 +1,7 @@
+.sidebar-open {
+  margin-left: 250px; /* Set the width of your sidebar */
+}
+
+.sidebar-closed {
+  margin-left: 0;
+}
