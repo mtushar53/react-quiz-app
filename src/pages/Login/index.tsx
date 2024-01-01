@@ -1,12 +1,9 @@
 import { useForm } from "react-hook-form";
-// import useAuthentication from "../../hooks/useAuthentication";
-import "./Login.css";
 import { Users } from "../../utils/Users";
-// import { useContext } from "react";
-// import AuthContext from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
+import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();

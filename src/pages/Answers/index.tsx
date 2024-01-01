@@ -3,10 +3,9 @@ import useQuestion from "../../hooks/useQuestion";
 import { useForm } from "react-hook-form";
 import useAnswer from "../../hooks/useAnswer";
 import useAuth, { getUserNameById } from "../../hooks/useAuth";
-import { ROLES } from "../../utils/Roles";
 
 const Answers = () => {
-  const { auth, isAdmin } = useAuth();
+  const { isAdmin } = useAuth();
   const { getQuestions } = useQuestion();
   const { getUserAnswersByQuestionId, addAnswer, getAnswersByQuestionId } =
     useAnswer();
