@@ -3,13 +3,15 @@ import React, { createContext, useState } from "react";
 interface Props {
   children: React.ReactNode;
 }
-interface IContext {
-  auth: {
+
+interface Auth {
     id: number;
     username: string;
     roles: string[];
-  };
-  setAuth: React.Dispatch<React.SetStateAction<string>>;
+}
+interface IContext {
+  auth: Auth;
+  setAuth: React.Dispatch<React.SetStateAction<Auth>>;
 }
 
 const initialState = {
