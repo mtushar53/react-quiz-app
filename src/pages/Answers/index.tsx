@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
-import useService from "../../hooks/useService";
+import useQuestion from "../../hooks/useQuestion";
 import { useForm } from "react-hook-form";
+import useAnswer from "../../hooks/useAnswer";
+import useAuth, { getUserNameById } from "../../hooks/useAuth";
+import { ROLES } from "../../utils/Roles";
 
 const Answers = () => {
-  const { getQuestions, addAnswer } = useService();
+  const { auth, isAdmin } = useAuth();
+  const { getQuestions } = useQuestion();
+  const { getUserAnswersByQuestionId, addAnswer, getAnswersByQuestionId } =
+    useAnswer();
   const [data, setData] = useState([]);
-  const [updated, setUpdated] = useState('');
+  const [updated, setUpdated] = useState("");
 
   const { register, handleSubmit } = useForm();
 
@@ -19,7 +25,7 @@ const Answers = () => {
     Object.entries(data).forEach(([key, value]) => {
       addAnswer(parseInt(key), value.toString());
     });
-    setUpdated(new Date().toString())
+    setUpdated(new Date().toString());
   };
 
   return (
@@ -52,7 +58,7 @@ const Answers = () => {
                 <div key={item.id}>
                   <div className="flex items-start">
                     <div>
-                      <span className="inline-flex justify-center items-center w-6 h-6 rounded bg-green-500 text-white font-medium text-sm">
+                      <span className="inline-flex justify-center items-center w-6 h-6 rounded bg-gradient-to-r from-purple-500 to-pink-600 text-white font-medium text-sm">
                         Q
                       </span>
                     </div>
@@ -60,36 +66,94 @@ const Answers = () => {
                     <p className="ml-4 md:ml-6 text-bold">{item.question}</p>
                   </div>
 
-                  <div className="flex items-center mt-3 gap-6">
+                  {isAdmin ? (
                     <div>
-                      <span className="inline-flex justify-center items-center w-6 h-6 rounded bg-gray-200 text-gray-800 font-medium text-sm">
-                        A
-                      </span>
-                    </div>
+                      {getAnswersByQuestionId(item.id)?.map((answer) => {
+                        return (
+                          <div
+                            key={answer.id}
+                            className="border-b-2 border-b-gray-100 pb-4 last:border-none"
+                          >
+                            <div className="flex gap-20">
+                              <div className="flex items-center mt-3 gap-6">
+                                <div>
+                                  <span className="inline-flex justify-center items-center w-6 h-6 rounded bg-gray-200 text-gray-800 font-medium text-sm">
+                                    U
+                                  </span>
+                                </div>
 
-                    <input
-                      type="text"
-                      id="username"
-                      className="mt-1 p-2 w-full border rounded-md"
-                      {...register(`${item.id}`, { required: true })}
-                      defaultValue={item.answers.slice(-1)}
-                    />
-                  </div>
-                  {item?.answers?.length > 1 && (
-                    <div>
-                      <span>Edit History: </span>
-                      {item?.answers?.slice(0, -1).join(",")}
+                                <h4>{getUserNameById(answer?.userId)}</h4>
+                              </div>
+                              <div className="flex items-center mt-3 gap-6">
+                                <div>
+                                  <span className="inline-flex justify-center items-center w-6 h-6 rounded bg-gray-200 text-gray-800 font-medium text-sm">
+                                    A
+                                  </span>
+                                </div>
+
+                                <h4>{answer?.values?.slice(-1)}</h4>
+                              </div>
+                            </div>
+                            <div className="flex items-center mt-3 gap-6">
+                              <div>
+                                <span className="inline-flex justify-center items-center w-6 h-6 rounded bg-gray-200 text-gray-800 font-medium text-sm">
+                                  H
+                                </span>
+                              </div>
+
+                              <h4>{answer?.values?.slice(0, -1).join(",")}</h4>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
+                  ) : (
+                    <>
+                      <div className="flex items-center mt-3 gap-6">
+                        <div>
+                          <span className="inline-flex justify-center items-center w-6 h-6 rounded bg-gray-200 text-gray-800 font-medium text-sm">
+                            A
+                          </span>
+                        </div>
+
+                        <input
+                          type="text"
+                          id="username"
+                          className="mt-1 p-2 w-full border rounded-md"
+                          {...register(`${item.id}`, { required: true })}
+                          defaultValue={getUserAnswersByQuestionId(
+                            item.id
+                          ).slice(-1)}
+                        />
+                      </div>
+                      {getUserAnswersByQuestionId(item.id)?.length > 1 && (
+                        <div className="flex items-center mt-3 gap-6">
+                          <div>
+                            <span className="inline-flex justify-center items-center w-6 h-6 rounded bg-gray-200 text-gray-800 font-medium text-sm">
+                              U
+                            </span>
+                          </div>
+
+                          <div>
+                            {getUserAnswersByQuestionId(item.id)
+                              ?.slice(0, -1)
+                              .join(",")}
+                          </div>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               );
             })}
-            <button
-              type="submit"
-              className="bg-blue-500 text-white p-2 rounded-md w-full"
-            >
-              Submit
-            </button>
+            {data?.length && !isAdmin ? (
+              <button
+                type="submit"
+                className="bg-blue-500 text-white p-2 rounded-md w-full"
+              >
+                Submit
+              </button>
+            ) : null}
           </form>
         </div>
       </div>

@@ -1,12 +1,12 @@
 import "react-responsive-modal/styles.css";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import useService from "../../hooks/useService";
+import useQuestion from "../../hooks/useQuestion";
 import QuestionModal from "../../components/Modal/QuestionModal";
 
 const Questions = () => {
   const { addQuestion, getQuestions, editQuestion, deleteQuestion } =
-    useService();
+    useQuestion();
   const [open, setOpen] = useState(false);
   const [editQuestionData, setEditQuestionData] = useState(null);
   const [updated, setUpdated] = useState("");
@@ -56,13 +56,13 @@ const Questions = () => {
       >
         <div className="w-full mx-auto p-5 bg-white rounded-lg shadow">
           <div className="flex items-center justify-between">
-            <div className="w-2/3">
+            <div className="sm:w-1/2 md:w-2/3">
               <h2 className="section-heading text-bold">Questions</h2>
             </div>
 
-            <div className="relative w-1/3 flex justify-end items-center space-x-1">
+            <div className="relative sm:w-1/2 md:w-1/3 flex justify-end items-center space-x-1">
               <button
-                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded `}
+                className={`bg-gradient-to-r from-purple-400 to-pink-600 text-white font-bold py-2 px-4 rounded `}
                 onClick={onOpenModal}
               >
                 Add Question

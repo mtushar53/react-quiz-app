@@ -5,6 +5,7 @@ import RequireAuth from "./routes/RequireAuth";
 import Questions from "./pages/Questions";
 import Answers from "./pages/Answers";
 import { ROLES } from "./utils/Roles";
+import "./App.css";
 
 function App() {
   return (
@@ -18,7 +19,9 @@ function App() {
           <Route path="questions" element={<Questions />} />
         </Route>
 
-        <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
+        <Route
+          element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
+        >
           <Route path="answers" element={<Answers />} />
         </Route>
 

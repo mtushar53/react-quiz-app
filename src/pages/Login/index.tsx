@@ -6,16 +6,18 @@ import { Users } from "../../utils/Users";
 // import AuthContext from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
 
 const Login = () => {
-  // const { status } = useContext(AuthContext);
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { auth, setAuth } = useAuth();
+  const { setAuth } = useAuth();
+
+  const [authError, setAuthError] = useState("");
 
   const onSubmit = (data) => {
     const user = Users.find((user) => user.username === data.username);
@@ -24,6 +26,8 @@ const Login = () => {
       setAuth(user);
       localStorage.setItem("auth", JSON.stringify(user));
       navigate("/answers", { replace: true });
+    } else {
+      setAuthError("Email or Password is not correct.");
     }
   };
 
@@ -52,7 +56,7 @@ const Login = () => {
               {...register("username", { required: true })}
             />
             {errors.username && (
-              <span className="text-warning">
+              <span className="text-pink-600">
                 <small>Username is Required</small>
               </span>
             )}
@@ -72,17 +76,17 @@ const Login = () => {
               {...register("password", { required: true })}
             />
             {errors.password && (
-              <span className="text-warning">
+              <span className="text-pink-600">
                 <small>Password is Required</small>
               </span>
             )}
           </div>
 
-          {/* {authError && <div className="text-warning">{authError}</div>} */}
+          {authError && <div className="text-pink-600 mb-2">{authError}</div>}
 
           <button
             type="submit"
-            className="bg-blue-500 text-white p-2 rounded-md w-full"
+            className="bg-gradient-to-r from-purple-400 to-pink-600 text-white p-2 rounded-md w-full"
           >
             Login
           </button>

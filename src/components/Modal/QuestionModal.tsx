@@ -35,7 +35,7 @@ function AddQuestionModal({
 
           <button
             type="submit"
-            className="bg-blue-500 text-white p-2 rounded-md w-full"
+            className="bg-gradient-to-r from-purple-400 to-pink-600 text-white p-2 rounded-md w-full"
           >
             Submit
           </button>

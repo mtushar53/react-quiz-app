@@ -5,3 +5,7 @@
 .sidebar-closed {
   margin-left: 0;
 }
+
+.active {
+  @apply text-purple-400;
+}
