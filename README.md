@@ -2,7 +2,7 @@
 
 Quiz App 
 
-An application used to set questions and user can answer, built with React, JavaScript, and tailwindcss.
+An application used to set questions that users can answer, built with React, JavaScript, and tailwindcss.
 
 ## Installation and Setup Instructions
 
@@ -18,18 +18,18 @@ To Start Server:
 
 To Visit App:
 
-`https://react-quiz-app-seven-tau.vercel.app/`  
+<https://react-quiz-app-seven-tau.vercel.app/> 
 
 ## Login Credentials
 
-#admin:
-username: admin
-password: admin
+#admin:<br/>
+username: admin<br/>
+password: admin<br/>
 
-#user1:
-username: user1
-password: user1
+#user1:<br/>
+username: user1<br/>
+password: user1<br/>
 
-#user2:
-username: user2
-password: user2
+#user2:<br/>
+username: user2<br/>
+password: user2<br/>
