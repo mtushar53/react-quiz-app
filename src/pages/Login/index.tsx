@@ -3,7 +3,6 @@ import { Users } from "../../utils/Users";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
-import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,16 +21,11 @@ const Login = () => {
       delete user.password;
       setAuth(user);
       localStorage.setItem("auth", JSON.stringify(user));
-      navigate("/answers", { replace: true });
+      navigate("/", { replace: true });
     } else {
       setAuthError("Email or Password is not correct.");
     }
   };
-
-  // if (auth?.username) {
-  //   navigate("/answers");
-  //   return;
-  // }
 
   return (
     <div className="container mx-auto flex justify-center items-center h-screen">

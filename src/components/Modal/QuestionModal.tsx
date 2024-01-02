@@ -12,19 +12,21 @@ function AddQuestionModal({
       open={open}
       onClose={onCloseModal}
       center
-      classNames={{ modal: "sm:w-full md:w-1/2" }}
+      classNames={{ modal: "sm:w-full md:w-1/2 rounded-md" }}
     >
       <div className="bg-white p-8">
-        <h2 className="text-2xl font-semibold mb-6">Your Question</h2>
+        <h2 className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-600">
+          Write Question
+        </h2>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label
+            {/* <label
               htmlFor="username"
               className="block text-gray-600 text-sm font-medium"
             >
               Write your question here
-            </label>
+            </label> */}
             <input
               type="text"
               id="question"

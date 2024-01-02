@@ -1,5 +1,12 @@
+interface Answer {
+  id: number;
+  questionId: number;
+  values: string[];
+  userId: number;
+}
+
 const useAnswer = () => {
-  const data = JSON.parse(localStorage.getItem("answers")) || [];
+  const data: Answer[] = JSON.parse(localStorage.getItem("answers")) || [];
   const auth = JSON.parse(localStorage.getItem("auth"));
 
   const getAnswers = () => {
@@ -20,12 +27,9 @@ const useAnswer = () => {
 
   const addAnswer = (questionId: number, answer: string) => {
     const index = data.findIndex(
-      (answer) =>
-        parseInt(answer.userId) === auth?.id &&
-        parseInt(answer.questionId) === questionId
+      (answer) => answer.userId === auth?.id && answer.questionId === questionId
     );
 
-    console.log(index, "index");
     if (data[index]?.values?.includes(answer)) return;
 
     if (index !== -1) {
@@ -46,7 +50,7 @@ const useAnswer = () => {
     getAnswers,
     addAnswer,
     getUserAnswersByQuestionId,
-    getAnswersByQuestionId
+    getAnswersByQuestionId,
   };
 };
 export default useAnswer;

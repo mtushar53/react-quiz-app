@@ -16,26 +16,10 @@ const Navbar = () => {
   };
 
   return (
-    <header
-      className="sticky
-    top-0 shadow-md"
-    >
-      <nav
-        className="
-        flex flex-wrap
-        items-center
-        justify-between
-        w-full
-        py-4
-        md:py-0
-        sm:px-4
-        md:px-24
-        text-lg text-gray-700
-        bg-white
-      "
-      >
+    <header className="sticky top-0 shadow-md">
+      <nav className="flex flex-wrap items-center justify-between w-full py-4 md:py-0 px-4 md:px-24 text-lg text-gray-700 bg-white">
         <div>
-          <Link to="#">
+          <Link to="/">
             <div className="grid place-items-center">
               <h1 className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-600">
                 Quizzy
@@ -65,14 +49,7 @@ const Navbar = () => {
           className="hidden w-full md:flex md:items-center md:w-auto"
           ref={menuRef}
         >
-          <ul
-            className="
-            pt-4
-            text-base text-gray-700
-            md:flex
-            md:justify-between 
-            md:pt-0"
-          >
+          <ul className="pt-4 text-base text-gray-700 md:flex md:justify-between md:pt-0">
             {!!auth?.username && isAdmin && (
               <li>
                 <Link
@@ -100,9 +77,9 @@ const Navbar = () => {
             )}
 
             {auth?.username ? (
-              <li>
+              <li className="flex items-center py-3">
                 <button
-                  className="md:p-4 py-2 block hover:text-purple-500 text-purple-500"
+                  className="block hover:text-white text-pink-500 h-8 px-4 border border-pink-500 rounded-md hover:bg-gradient-to-r from-purple-500 to-pink-600"
                   onClick={() => {
                     localStorage.removeItem("auth");
                     setAuth(null);
@@ -113,10 +90,10 @@ const Navbar = () => {
                 </button>
               </li>
             ) : (
-              <li>
+              <li className="flex items-center py-3">
                 <Link
-                  className="md:p-4 py-2 block hover:text-purple-500 text-purple-500"
-                  to="#"
+                  className="block hover:text-white text-pink-500 h-8 px-4 border border-pink-500 rounded-md hover:bg-gradient-to-r from-purple-500 to-pink-600"
+                  to="/login"
                 >
                   Sign in
                 </Link>
